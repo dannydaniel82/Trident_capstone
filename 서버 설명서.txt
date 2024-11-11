@@ -1,0 +1,30 @@
+"""
+#### 터미널에서 가상환경에서 작동시키는법 (FastAPI 설치 되었을 시) ver.choi ###
+# cd /Users/DFD_capstone
+# source DFD_capstone/bin/activate
+# uvicorn main:app
+
+##### 작동시 아래 문구 출력 #####
+INFO:     Started server process [42287]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+위 url 클릭 or 브라우저에 입력
+
+"""
+# 가상환경 세팅
+# pip install -r requirements.txt
+
+# requirements 설치 이후 라이브러리 / 버전 에러시, 다음 내용 라이브러리 가상환경에 설치 및 버전변경
+# "requirements 설치(mac os)" 파일 확인 후 필요한 내용 있는지 검토
+
+# pip install boost
+# pip install dlib
+# pip install python-multipart
+# pip install numpy==1.24.4
+"""
+# for front-end (node.js react)
+# react 내용 수정하면 반드시 npm run build  로 빌드 업데이트하기
+# 3d 객체12
+npm install @react-three/fiber @react-three/drei
+"""

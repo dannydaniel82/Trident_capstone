@@ -1,0 +1,31 @@
+<!-- templates/select_model.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>모델 및 프레임 설정</title>
+</head>
+<body>
+    <h1>모델 및 프레임 설정</h1>
+    <form action="/select_model" method="post">
+        <input type="hidden" name="session_id" value="{{ session_id }}">
+        <label for="model_name">모델 선택:</label>
+        <select name="model_name" required>
+            <option value="xception">Xception</option>
+            <option value="1104">1104배포</option>
+            <option value="mnist">mnist2</option>
+
+        </select>
+        <br><br>
+
+        <label for="frame_rate">프레임 설정:</label>
+        <select name="frame_rate" required>
+            <option value="low">자세하게 확인할래요[hard]</option>
+            <option value="medium">기본값으로 확인할래요[medium]</option>
+            <option value="high">빠르게 확인할래요[easy]</option>
+        </select>
+        <br><br>
+
+        <button type="submit">탐지하기</button>
+    </form>
+</body>
+</html>

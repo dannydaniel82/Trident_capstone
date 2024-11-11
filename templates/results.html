@@ -1,0 +1,31 @@
+<!-- templates/results.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>분석 결과</title>
+</head>
+<body>
+    <h1>분석 결과</h1>
+    <p>결과: {{ result }}</p>
+    <img src="{{ thumbnail }}" alt="Thumbnail" width="300">
+
+    <h2>Detection Result</h2>
+    <p>{{ result }}</p>
+    <img src="{{ graph }}" alt="Score Graph">
+
+    <h2>Processed Video</h2>
+    <video width="640" height="480" controls src="{{ output_video }}">
+        비디오를 재생할 수 없습니다.
+    </video>
+
+    <br><br>
+    <form action="/download_csv" method="get">
+        <input type="hidden" name="session_id" value="{{ session_id }}">
+        <button type="submit">CSV 다운로드</button>
+    </form>
+    <form action="/reset" method="post">
+        <input type="hidden" name="session_id" value="{{ session_id }}">
+        <button type="submit">종료하기</button>
+    </form>
+</body>
+</html>

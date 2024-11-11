@@ -1,0 +1,9 @@
+Trident/model 파일에 .pt / .pth / .pkl 파일 업로드
+
+Trident/modules/model_loader.py
+- def load_model(self):
+
+        elif self.model_name == '1104':
+            model = model_selection(modelname='xception', num_out_classes=2, dropout=0.5)
+            model_path = 'model/1104배포.pth'
+위 형식 참고하여 수정
