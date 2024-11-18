@@ -172,6 +172,8 @@ async def results(request: Request, session_id: str):
     thumbnail = sessions[session_id]['thumbnail']
     graph = sessions[session_id].get('graph')
     output_video = sessions[session_id]['output_video']
+    average = sessions[session_id]['average']
+    label = sessions[session_id]['label']
 
     return templates.TemplateResponse("results.html", {
         "request": request,
@@ -179,7 +181,9 @@ async def results(request: Request, session_id: str):
         "result": result,
         "thumbnail": thumbnail,
         "graph": graph,
-        "output_video": output_video
+        "output_video": output_video,
+        "average": average,
+        "label": label
     })
 
 # CSV 다운로드 엔드포인트
