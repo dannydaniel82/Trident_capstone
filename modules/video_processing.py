@@ -162,6 +162,8 @@ class VideoProcessor:
         self.sessions[self.session_id]['result'] = f'Average Score: {avg_score:.2f} - {label}'
         self.sessions[self.session_id]['output_video'] = f"/{self.final_output_video_path}"
         self.sessions[self.session_id]['result_ready'] = True
+        self.sessions[self.session_id]['average'] = f'{avg_score:.2f}'
+        self.sessions[self.session_id]['label'] = label
 
     def generate_graph(self):
         # 그래프 생성 및 저장
