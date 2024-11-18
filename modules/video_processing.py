@@ -165,17 +165,6 @@ class VideoProcessor:
         self.sessions[self.session_id]['average'] = int(avg_score*100)
         self.sessions[self.session_id]['label'] = label
 
-    def generate_graph(self):
-        # 그래프 생성 및 저장
-        graph_path = f"static/{self.session_id}_graph.png"
-        plt.figure(figsize=(10, 4))
-        plt.plot(self.frame_scores, marker='o')
-        plt.title('Frame-wise Score')
-        plt.xlabel('Frame Index')
-        plt.ylabel('Fake Probability')
-        plt.savefig(graph_path)
-        plt.close()
-        self.sessions[self.session_id]['graph'] = f"/{graph_path}"
     def process(self):
         self.extract_audio()
         self.process_video()
