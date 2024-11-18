@@ -6,6 +6,7 @@ import torch
 import subprocess
 import os
 from tqdm import tqdm
+import matplotlib
 import matplotlib.pyplot as plt
 from .utils import get_boundingbox, predict_with_model
 
@@ -173,9 +174,7 @@ class VideoProcessor:
         self.generate_graph()
 
     def generate_graph(self):
-        import matplotlib
         matplotlib.use('Agg')  # 백엔드를 'Agg'로 설정하여 GUI 사용 방지
-        import matplotlib.pyplot as plt
 
         # 그래프 생성 및 저장
         graph_path = f"static/{self.session_id}_graph.png"
