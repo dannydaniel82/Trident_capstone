@@ -52,15 +52,24 @@ def preprocess_image(image, cuda=True):
         preprocessed_image = preprocessed_image.cuda()
     return preprocessed_image
 
+def preprocess_image(image, cuda=True):
+    """
+    Preprocesses the image such that it can be fed into our network.
+    :param image: numpy image in opencv form (BGR and of shape)
+    :return: pytorch tensor of shape [1, 3, image_size, image_size]
+    """
+    # Revert from BGR
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    # Preprocess using the preprocessing function used during training
+    preprocess = xception_default_data_transforms['test']
+    preprocessed_image = preprocess(pil_image.fromarray(image))
+    # Add first dimension as the network expects a batch
+    preprocessed_image = preprocessed_image.unsqueeze(0)
+    if cuda:
+        preprocessed_image = preprocessed_image.cuda()
+    return preprocessed_image
+
 def predict_with_model(image, model, post_function=nn.Softmax(dim=1), cuda=True):
-    """
-    Predicts the label of an input image.
-    :param image: numpy image
-    :param model: torch model with linear layer at the end
-    :param post_function: e.g., softmax
-    :param cuda: enables cuda
-    :return: prediction (1 = fake, 0 = real), output probabilities
-    """
     # Preprocess
     preprocessed_image = preprocess_image(image, cuda)
     # Model prediction
@@ -68,5 +77,5 @@ def predict_with_model(image, model, post_function=nn.Softmax(dim=1), cuda=True)
     output = post_function(output)
     # Get prediction
     _, prediction = torch.max(output, 1)
-    prediction = int(prediction.cpu().numpy())
-    return prediction, output
+    prediction = float(prediction.cpu().numpy())
+    return int(prediction), output

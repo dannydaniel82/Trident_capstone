@@ -18,6 +18,9 @@ class ModelLoader:
         elif self.model_name == '1104':
             model = model_selection(modelname='xception', num_out_classes=2, dropout=0.5)
             model_path = 'model/1104배포.pth'
+        elif self.model_name == 'best_model_fold_5.pkl':
+            model = model_selection(modelname='xception', num_out_classes=2, dropout=0.5)
+            model_path = 'model/best_model_fold_5.pkl'
         else:
             raise ValueError(f"Model '{self.model_name}' not recognized.")
 
