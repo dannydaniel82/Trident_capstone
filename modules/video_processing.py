@@ -9,6 +9,8 @@ from tqdm import tqdm
 import matplotlib
 import matplotlib.pyplot as plt
 from .utils import get_boundingbox, predict_with_model
+from dataset.transform import xception_default_data_transforms
+from PIL import Image as pil_image
 
 class VideoProcessor:
     def __init__(self, session_id, sessions):
@@ -38,7 +40,16 @@ class VideoProcessor:
         else:
             print("Audio extraction successful.")
         self.audio_path = audio_path
-
+        
+    def preprocess_image(image, cuda=True):
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        preprocess = xception_default_data_transforms['test']
+        preprocessed_image = preprocess(pil_image.fromarray(image))
+        preprocessed_image = preprocessed_image.unsqueeze(0)
+        if cuda:
+            preprocessed_image = preprocessed_image.cuda()
+        return preprocessed_image
+        
     def process_video(self):
         # Initialize video reader
         reader = cv2.VideoCapture(self.video_path)
@@ -47,14 +58,21 @@ class VideoProcessor:
         frame_scores = []
         frame_num = 0
 
-        # Initialize video writer
+            # Initialize video reader
+        reader = cv2.VideoCapture(self.video_path)
+        num_frames = int(reader.get(cv2.CAP_PROP_FRAME_COUNT))
+        fps = reader.get(cv2.CAP_PROP_FPS)
+        frame_scores = []
+        frame_num = 0
+        smoothed_score_result = []
+            # Initialize video writer
         output_video_path = os.path.join("static", f"{self.session_id}_output.mp4")
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Use 'mp4v' codec
         width = int(reader.get(cv2.CAP_PROP_FRAME_WIDTH))
         height = int(reader.get(cv2.CAP_PROP_FRAME_HEIGHT))
         writer = cv2.VideoWriter(output_video_path, fourcc, fps, (width, height))
 
-        # Initialize last known annotations
+            # Initialize last known annotations
         last_x, last_y, last_w, last_h = None, None, None, None
         last_label = None
         last_color = (0, 255, 0)  # Default color (e.g., Green for 'Real')
@@ -64,7 +82,7 @@ class VideoProcessor:
         pbar = tqdm(total=num_frames)
         while reader.isOpened():
             ret, image = reader.read()
-            if not ret:
+            if image is None:
                 break
             frame_num += 1
             pbar.update(1)  # Update the progress bar once per frame
@@ -73,6 +91,11 @@ class VideoProcessor:
             progress = int((frame_num / num_frames) * 100)
             self.sessions[self.session_id]['progress'] = progress
 
+            # 1122 수정작업
+            smoothing_window = 5
+            frame_score_history = []
+            stability_threshold = 0.2 # 점수 변동성을 허용하는 범위
+            
             # Process only every nth frame based on frame_rate
             if frame_num % self.frame_rate == 0:
                 # Convert image to grayscale for face detection
@@ -86,13 +109,24 @@ class VideoProcessor:
                     cropped_face = image[y1:y1 + size, x1:x1 + size]
 
                     # Predict with model
-                    prediction, output = predict_with_model(cropped_face, self.model, cuda=self.device.type == 'cuda')
+                    prediction, output = predict_with_model(image, self.model, cuda=self.device.type == 'cuda')
                     score = output[0][1].item()  # Assuming output is [batch_size, 2] with [real_score, fake_score]
+                    ### 점수 안정화 로직 11.22###
+                    frame_score_history.append(score)
+                    if len(frame_score_history) > smoothing_window:
+                        frame_score_history.pop(0)
+                    ### 이동평균 계산 ###
+                    smoothed_score = sum(frame_score_history) / len(frame_score_history)
+                    score_variance = max(frame_score_history) - min(frame_score_history)
+                    smoothed_score_result.append(smoothed_score)
                     frame_scores.append(score)
-
-                    # Determine label and color based on prediction
-                    label = 'Fake' if prediction == 1 else 'Real'
-                    color = (0, 0, 255) if prediction == 1 else (0, 255, 0)
+                    # 안정성 기반 레이블링
+                    if score_variance <= stability_threshold:
+                        label = 'Fake' if smoothed_score > 0.5 else 'Real'
+                        color = (0, 0, 255) if label == 'Fake' else (0, 255, 0)
+                    else:
+                        label = 'Uncertain'
+                        color = (255, 255, 0)  # 
 
                     # Format output_list
                     output_list = ['{0:.2f}'.format(float(x)) for x in output.detach().cpu().numpy()[0]]
