@@ -33,11 +33,7 @@ os.makedirs(video_directory, exist_ok=True)
 # 1. 첫 번째 화면: 프로젝트 소개 및 '시작하기' 버튼
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    return templates.TemplateResponse("index.html", {
-        "request": request,
-        "title": "home",
-        "session_id": ""
-    })
+    return templates.TemplateResponse("index.html", {"request": request})
 
 # '시작하기' 버튼 클릭 처리
 @app.post("/start")
@@ -47,11 +43,7 @@ async def start():
 # 2. 두 번째 화면: 비디오 업로드
 @app.get("/upload", response_class=HTMLResponse)
 async def upload_page(request: Request):
-    return templates.TemplateResponse("upload.html", {
-        "request": request,
-        "title": "video upload",
-        "session_id": ""
-    })
+    return templates.TemplateResponse("upload.html", {"request": request})
 
 # 비디오 업로드 처리
 @app.post("/upload_video")
@@ -144,8 +136,6 @@ async def processing(request: Request, session_id: str):
     # 모델 처리를 백그라운드에서 수행
     asyncio.create_task(run_model(session_id))
     return templates.TemplateResponse("loading.html", {"request": request, "session_id": session_id})
-
-
 
 # 결과 준비 여부 확인 엔드포인트
 @app.get("/check_result")

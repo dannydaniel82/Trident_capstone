@@ -1,6 +1,7 @@
 <!-- templates/results.html -->
 <!DOCTYPE html>
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
 <head>
     <title>분석 결과</title>
 </head>
@@ -14,9 +15,13 @@
     <img src="{{ graph }}" alt="Score Graph">
 
     <h2>Processed Video</h2>
-    <video width="640" height="480" controls src="{{ output_video }}">
-        비디오를 재생할 수 없습니다.
+    <video width="640" height="480" controls autoplay muted playsinline>
+    <source src="{{ final_output_video }}" type="video/mp4">
+    비디오를 재생할 수 없습니다.
     </video>
+
+
+
 
     <br><br>
     <form action="/download_csv" method="get">

@@ -1,14 +1,10 @@
 <!-- templates/upload.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>비디오 업로드</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
     <h1>비디오 업로드</h1>
     <form action="/upload_video" method="post" enctype="multipart/form-data">
         <input type="file" name="video" accept="video/*" required>
         <button type="submit">업로드</button>
     </form>
-</body>
-</html>
+{% endblock %}

@@ -1,15 +1,9 @@
 <!-- templates/index.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>main page</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
     <h1>삼지창 Deepfake Detection</h1>
     <p>삼지창 Deepfake Detection</p>
     <form action="/start" method="post">
         <button type="submit">시작하기</button>
     </form>
-</body>
-</html>
-
+{% endblock %}
