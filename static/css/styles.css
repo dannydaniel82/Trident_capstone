@@ -1,0 +1,492 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  background: #000;
+  overflow-y: auto; /* 세로 스크롤 */
+}
+
+/* 심해 배경 */
+.deep-sea-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom,
+    #000510 0%,
+    #001B3B 30%,
+    #002A4E 70%,
+    #001528 100%
+  );
+  opacity: 0.8;
+}
+
+/* 떠다니는 요소들 컨테이너 */
+.floating-elements {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 개별 떠다니는 요소 */
+.float-item {
+  position: absolute;
+  font-size: 1.5rem;
+  opacity: 0.7;
+  animation: float-animation var(--duration) ease-in-out infinite;
+  filter: brightness(0.8);
+}
+
+/* 각 요소별 초기 위치와 애니메이션 시간 설정 */
+.fish1 {
+  top: 20%;
+  left: 10%;
+  --duration: 15s;
+  animation-delay: -2s;
+}
+
+.fish2 {
+  top: 65%;
+  left: 75%;
+  --duration: 18s;
+  animation-delay: -5s;
+}
+
+.fish3 {
+  top: 40%;
+  left: 30%;
+  --duration: 20s;
+  animation-delay: -8s;
+}
+
+.trident1 {
+  top: 80%;
+  left: 50%;
+  --duration: 25s;
+  animation-delay: -12s;
+}
+
+.bubble1 {
+  top: 30%;
+  left: 85%;
+  --duration: 12s;
+  animation-delay: -3s;
+  animation: bubble-animation 12s ease-in-out infinite;
+}
+
+.fish4 {
+  top: 70%;
+  left: 15%;
+  --duration: 22s;
+  animation-delay: -15s;
+}
+
+.bubble2 {
+  top: 50%;
+  left: 60%;
+  --duration: 14s;
+  animation-delay: -7s;
+  animation: bubble-animation 14s ease-in-out infinite;
+}
+
+.trident2 {
+  top: 25%;
+  left: 40%;
+  --duration: 23s;
+  animation-delay: -18s;
+}
+
+.fish5 {
+  top: 85%;
+  left: 90%;
+  --duration: 19s;
+  animation-delay: -10s;
+}
+
+.bubble3 {
+  top: 15%;
+  left: 25%;
+  --duration: 16s;
+  animation-delay: -5s;
+  animation: bubble-animation 16s ease-in-out infinite;
+}
+
+/* 물고기 움직임 애니메이션 */
+@keyframes float-animation {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(100px, 50px) rotate(5deg);
+  }
+  50% {
+    transform: translate(200px, -30px) rotate(-5deg);
+  }
+  75% {
+    transform: translate(100px, 80px) rotate(5deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+/* 거품 움직임 애니메이션 */
+@keyframes bubble-animation {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-30px, -100px) scale(1.1);
+  }
+  100% {
+    transform: translate(0, -200px) scale(1);
+    opacity: 0;
+  }
+}
+
+/* 팀 패널 스타일 */
+.team-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  background: rgba(0, 27, 59, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  z-index: 2;
+}
+
+.team-icon {
+  font-size: 2rem;
+}
+
+.team-text {
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.5px;
+}
+
+.container {
+  max-width: 1600px;
+  padding: 2rem;
+  text-align: center;
+  animation: fadeIn 1s ease-in;
+  z-index: 1;
+  background: rgba(0, 27, 59, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 4px solid rgba(77, 155, 216, 0.29);
+  position: relative;
+  overflow-y: auto; /* 컨테이너 내 스크롤 활성화 */
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+h2 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+h3 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.0;
+  margin-bottom: 0.5rem;
+  color: rgba(236, 236, 243, 0.88);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+h4 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.0;
+  margin-bottom: 0.5rem;
+  color: rgb(4, 148, 244);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+
+p {
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0.5rem 0;
+}
+
+.emoji-container {
+  margin-top: 3rem;
+}
+
+button {
+  background: linear-gradient(90deg, #00a6ed, #0077be);
+  color: #ffffff;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  margin: 0 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(0, 166, 237, 0.4);
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+input[type='file'] {
+  display: block;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+.form__input--file_wrap {
+  display: flex;
+}
+.form__label--file {
+  width: 80px;
+  height: 30px;
+  line-height:30px;
+  background: #00a6ed;
+  border-radius: 3px;
+  color: #fff;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.form__span--file {
+  padding: 0 5px 0 10px;
+  margin-left: 5px;
+  display: block;
+  width: 300px;
+  min-height: 30px;
+  border: 1px solid #e7e7e7;
+  border-radius: 3px;
+  line-height: 30px;
+  color: #999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
+
+  .container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .team-panel {
+    padding: 0.8rem;
+  }
+
+  .team-text {
+    font-size: 0.9rem;
+  }
+
+  .float-item {
+    font-size: 1.2rem;
+  }
+}
+
+/* 1118 */
+.model-box h3 {
+    color: #00a6ed;
+    margin-bottom: 0.5rem;
+}
+
+.frame-info-box {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(0, 27, 59, 0.3);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.frame-details p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .model-info-boxes {
+        grid-template-columns: 1fr;
+    }
+
+    .selection-group select {
+        font-size: 0.9rem;
+    }
+}
+
+
+/* 1118(2) */
+.upload-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+}
+
+.upload-form {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;  /* 파일선택과 업로드 버튼 사이 간격 */
+}
+
+.file-upload-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.file-upload-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    background: linear-gradient(90deg, #00a6ed, #0077be);
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    font-weight: 600;
+}
+
+.file-upload-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 166, 237, 0.4);
+}
+
+.file-upload-btn .icon {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.file-name-display {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
+
+.form__input--file {
+    display: none;
+}
+
+.upload-button {
+    width: 100%;
+    padding: 1rem 8rem;
+    margin-top: 1rem;
+}
+
+/* 1118(3) */
+.frame-info-box {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(0, 27, 59, 0.3);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.frame-info-box h3 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.frame-details {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.frame-details p {
+    flex: 1;
+    margin: 0;
+    padding: 1rem;
+    background: rgba(0, 27, 59, 0.4);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.9rem;
+}
