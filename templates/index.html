@@ -1,9 +1,56 @@
-<!-- templates/index.html -->
-{% extends "base.html" %}
-{% block content %}
-    <h1>삼지창 Deepfake Detection</h1>
-    <p>삼지창 Deepfake Detection</p>
-    <form action="/start" method="post">
-        <button type="submit">시작하기</button>
-    </form>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>딥페이크 탐지 솔루션</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+  <div class="deep-sea-bg"></div>
+
+  <div class="floating-elements">
+    <!-- 여러 개의 이모지를 무작위 위치에 배치 -->
+    <div class="float-item fish1">🐟</div>
+    <div class="float-item bubble1">🫧</div>
+    <div class="float-item fish2">🐠</div>
+    <div class="float-item bubble1">🫧</div>
+    <div class="float-item fish3">🐡</div>
+    <div class="float-item trident1">🔱</div>
+    <div class="float-item bubble1">🫧</div>
+    <div class="float-item trident1">🔱</div>
+    <div class="float-item trident1">🔱</div>
+    <div class="float-item bubble1">🫧</div>
+    <div class="float-item fish4">🐟</div>
+    <div class="float-item bubble2">🫧</div>
+    <div class="float-item trident2">🔱</div>
+    <div class="float-item bubble1">🫧</div>
+    <div class="float-item trident1">🔱</div>
+    <div class="float-item bubble1">🫧</div>
+    <div class="float-item trident1">🔱</div>
+    <div class="float-item bubble1">🫧</div>
+    <div class="float-item fish5">🐠</div>
+    <div class="float-item bubble3">🫧</div>
+  </div>
+
+  <div class="team-panel">
+    <span class="team-icon">🎓</span>
+    <span class="team-text">단국대학교 소프트웨어학과 캡스톤디자인 삼지창팀</span>
+    <span class="team-icon">🎓</span>
+  </div>
+
+  <div class="container">
+    <h1>인공지능을 활용한</h1>
+    <h1>딥페이크 탐지 솔루션</h1>
+    <p>빠르고 쉽고 정확하게</p>
+    <p>시작해보세요</p>
+    <div class="emoji-container">
+      <form action="/start" method="post">
+        <span>🔱</span>
+        <button type="submit"><h3>눌러서 시작하기</h3></button>
+        <span>🔱</span>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
