@@ -6,7 +6,7 @@ import torch.nn as nn
 from PIL import Image as pil_image
 from dataset.transform import xception_default_data_transforms
 
-def get_boundingbox(face, width, height, scale=0.8, minsize=None):
+def get_boundingbox(face, width, height, scale=1.0, minsize=None):
     """
     Expects a dlib face to generate a quadratic bounding box.
     :param face: dlib face class
