@@ -4,7 +4,8 @@
 
 # Model :: Xception
 reference1 :: https://github.com/HongguLiu/Deepfake-Detection
-reference2 :; https://github.com/ondyari/FaceForensics
+
+reference2 :: https://github.com/ondyari/FaceForensics
 
 ## Python, FastAPI, HTML, CSS
 
@@ -44,3 +45,10 @@ INFO: Application startup complete.
 INFO: Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 
 위 url 클릭 or 브라우저에 입력 합니다.
+
+<img width="682" alt="비디오 업로드" src="https://github.com/user-attachments/assets/5146a607-9be5-4fec-8ab0-1aae756f7e6c">
+
+<img width="682" alt="초기화면" src="https://github.com/user-attachments/assets/65fc7c38-020f-4f8a-bab7-f071e8733a30">
+<img width="682" alt="모델 및 프레임 설정" src="https://github.com/user-attachments/assets/5ec7e464-867b-409d-a7dc-530d22e6cd68">
+<img width="682" alt="최종결과(3)" src="https://github.com/user-attachments/assets/798a2138-95d4-4ccb-afc2-1b598f6caf8f">
+
