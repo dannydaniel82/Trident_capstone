@@ -7,7 +7,7 @@ Dankook University
 
 데모버전을 배포한다. 개발환경 : macOS 사용설명서는 다음과 같습니다.
 
-가상환경 세팅 **** 가상환경의 경로는 꼴리는대로 설정해주십시오. ****
+가상환경 세팅 **** 가상환경의 경로는 사용자 커스텀으로 설정해주십시오. ****
 requirements.txt 에서 필요한 라이브러리를 설치합니다. copy >>> pip install -r requirements.txt
 
 다 설치하세요
@@ -40,29 +40,3 @@ INFO: Application startup complete.
 INFO: Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 
 위 url 클릭 or 브라우저에 입력 합니다.
-
-your_project/
-├── main.py
-├── modules/
-│ ├── init.py
-│ ├── model_loader.py
-│ ├── video_processing.py
-│ ├── session_manager.py
-│ ├── utils.py
-│ ├── network/
-│ │ ├── init.py
-│ │ └── models.py
-│ └── dataset/
-│ ├── init.py
-│ └── transform.py
-├── templates/
-│ ├── index.html
-│ ├── upload.html
-│ ├── select_model.html
-│ ├── loading.html
-│ └── results.html
-├── static/
-│ └── (static files)
-├── uploaded_videos/
-├── requirements.txt
-└── README.md
