@@ -2,6 +2,10 @@
 # 단국대학교 소프트웨어학과 캡스톤디자인
 # 딥페이크 탐지 솔루션
 
+## 시연동영상은 다음 링크에서 확인할 수 있습니다.
+>> https://youtu.be/VaUbPGmcrPU <<
+
+
 # Model :: Xception
 reference1 :: https://github.com/HongguLiu/Deepfake-Detection
 
